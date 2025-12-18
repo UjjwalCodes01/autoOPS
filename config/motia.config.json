@@ -1,0 +1,5 @@
+{
+  "name": "autoops",
+  "stepsDir": "./steps",
+  "logLevel": "debug"
+}

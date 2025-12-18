@@ -1,0 +1,25 @@
+{
+  "name": "autoops",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx motia dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.2",
+    "@google/generative-ai": "^0.24.1",
+    "@motiadev/core": "0.17.9-beta.191",
+    "@motiadev/plugin-bullmq": "0.17.9-beta.191",
+    "@motiadev/plugin-endpoint": "0.17.9-beta.191",
+    "@motiadev/plugin-logs": "0.17.9-beta.191",
+    "@motiadev/plugin-observability": "0.17.9-beta.191",
+    "@motiadev/plugin-states": "0.17.9-beta.191",
+    "motia": "^0.17.9-beta.191"
+  }
+}
