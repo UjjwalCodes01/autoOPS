@@ -2,7 +2,7 @@ export const config = {
   type: "event",
   name: "intelligent-router",
   subscribes: ["incident.analyzed"],
-  emits: ["incident.ready_for_remediation", "incident.ready_for_escalation"]
+  emits: ["incident.ready_for_remediation", "incident.ready_for_escalation", "incident.ready_for_monitoring"]
 };
 
 export async function handler(data, ctx) {
@@ -27,7 +27,7 @@ export async function handler(data, ctx) {
       topic: "incident.ready_for_escalation",
       data
     });
-  } else {
+  } else if (data.recommendation === "attempt_remediation") {
     ctx.logger.info("🔧 Routing to remediation", {
       incidentId: data.id,
       action: data.suggestedAction
@@ -35,6 +35,17 @@ export async function handler(data, ctx) {
 
     await ctx.emit({
       topic: "incident.ready_for_remediation",
+      data
+    });
+  } else {
+    // recommendation === "monitor" - just log and monitor
+    ctx.logger.info("👁️ Routing to monitoring", {
+      incidentId: data.id,
+      action: data.suggestedAction
+    });
+
+    await ctx.emit({
+      topic: "incident.ready_for_monitoring",
       data
     });
   }

@@ -12,11 +12,16 @@ declare module 'motia' {
   }
 
   interface Handlers {
+    'incident-workflow': EventHandler<never, { topic: 'workflow.escalated'; data: never } | { topic: 'incident.ready_for_remediation'; data: never }>
+    'websocket-notifier': EventHandler<never, never>
+    'incident-streamer': EventHandler<never, never>
     'incident-api': ApiRouteHandler<Record<string, unknown>, unknown, { topic: 'incident.received'; data: never }>
-    'intelligent-router': EventHandler<never, { topic: 'incident.ready_for_remediation'; data: never } | { topic: 'incident.ready_for_escalation'; data: never }>
+    'intelligent-router': EventHandler<never, { topic: 'incident.ready_for_remediation'; data: never } | { topic: 'incident.ready_for_escalation'; data: never } | { topic: 'incident.ready_for_monitoring'; data: never }>
     'auto-remediate': EventHandler<never, { topic: 'incident.escalated'; data: never }>
-    'hello-step': EventHandler<never, never>
+    'incident-monitor': EventHandler<never, never>
+    'health-check': ApiRouteHandler<Record<string, unknown>, unknown, never>
     'incident-escalate': EventHandler<never, never>
+    'incident-cleanup': CronHandler<{ topic: 'cleanup.completed'; data: never }>
     'incident-classifier': EventHandler<never, { topic: 'incident.classified'; data: never }>
     'ai-analyst': EventHandler<never, { topic: 'incident.analyzed'; data: never }>
   }

@@ -307,21 +307,67 @@ autoops/
 
 ## 🚀 Deployment
 
-### Local Development
+### Quick Deploy Options
+
+#### 1. **Motia Cloud** (Recommended for Hackathon)
+```bash
+# Deploy directly to Motia Cloud
+npm install -g @motia/cli
+motia deploy
+```
+
+#### 2. **Local Production**
+```bash
+# Quick local production deploy
+npm run deploy:local
+```
+
+#### 3. **Docker Deployment**
+```bash
+# Deploy with Docker Compose
+npm run deploy:docker
+
+# Or manually:
+docker-compose up -d --build
+```
+
+#### 4. **Cloud Platforms**
+
+**Railway:**
+```bash
+npm run deploy:railway
+# Then: railway login && railway init && railway up
+```
+
+**Render:**
+```bash
+npm run deploy:render
+# Then connect GitHub repo to Render
+```
+
+**Fly.io:**
+```bash
+npm run deploy:fly
+# Then: fly launch
+```
+
+### Manual Deployment
+
+#### Local Development
 ```bash
 npm run dev
 ```
 
-### Production Deployment
+#### Production Deployment
 ```bash
 # Build (if needed)
 npm run build
 
-# Run
-NODE_ENV=production npx motia dev
+# Run in production
+NODE_ENV=production npm run start:prod
 ```
 
-### Docker (Optional)
+#### Docker (Optional)
 ```dockerfile
 FROM node:18-alpine
 WORKDIR /app
@@ -329,6 +375,17 @@ COPY . .
 RUN npm install
 EXPOSE 3000
 CMD ["npm", "run", "dev"]
+```
+
+### Environment Variables
+- `GOOGLE_AI_API_KEY`: Optional Google Gemini API key for real AI
+- `NODE_ENV`: Set to `development` or `production`
+- `PORT`: Port number (default: 3000)
+
+### Health Check
+Your app includes a health check endpoint:
+```bash
+curl http://localhost:3000/health
 ```
 
 ## 📝 Configuration
