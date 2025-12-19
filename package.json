@@ -9,7 +9,6 @@
     "build": "echo 'No build step required for Motia'",
     "deploy": "./deploy.sh",
     "deploy:local": "./deploy.sh local",
-    "deploy:docker": "./deploy.sh docker",
     "deploy:railway": "./deploy.sh railway",
     "deploy:render": "./deploy.sh render",
     "deploy:fly": "./deploy.sh fly",
@@ -35,11 +34,9 @@
     "@anthropic-ai/sdk": "^0.71.2",
     "@google/generative-ai": "^0.24.1",
     "@motiadev/core": "0.17.9-beta.191",
-    "@motiadev/plugin-bullmq": "0.17.9-beta.191",
     "@motiadev/plugin-endpoint": "0.17.9-beta.191",
     "@motiadev/plugin-logs": "0.17.9-beta.191",
     "@motiadev/plugin-observability": "0.17.9-beta.191",
-    "@motiadev/plugin-states": "0.17.9-beta.191",
     "motia": "^0.17.9-beta.191"
   }
 }

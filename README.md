@@ -322,16 +322,7 @@ motia deploy
 npm run deploy:local
 ```
 
-#### 3. **Docker Deployment**
-```bash
-# Deploy with Docker Compose
-npm run deploy:docker
-
-# Or manually:
-docker-compose up -d --build
-```
-
-#### 4. **Cloud Platforms**
+#### 3. **Cloud Platforms**
 
 **Railway:**
 ```bash
@@ -365,16 +356,6 @@ npm run build
 
 # Run in production
 NODE_ENV=production npm run start:prod
-```
-
-#### Docker (Optional)
-```dockerfile
-FROM node:18-alpine
-WORKDIR /app
-COPY . .
-RUN npm install
-EXPOSE 3000
-CMD ["npm", "run", "dev"]
 ```
 
 ### Environment Variables

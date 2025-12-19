@@ -21,12 +21,6 @@ motia deploy
 npm run deploy:local
 ```
 
-### Option 3: Docker
-```bash
-# Deploy with Docker
-npm run deploy:docker
-```
-
 ## Detailed Deployment Options
 
 ### 1. Local Deployment
@@ -47,33 +41,7 @@ npm run deploy:local
 # Creates .pid file for process management
 ```
 
-### 2. Docker Deployment
-
-#### Using Docker Compose (Recommended)
-```bash
-# Build and run
-docker-compose up -d --build
-
-# Check status
-docker-compose ps
-
-# View logs
-docker-compose logs -f
-
-# Stop
-docker-compose down
-```
-
-#### Manual Docker
-```bash
-# Build image
-docker build -t autoops .
-
-# Run container
-docker run -p 3000:3000 -e NODE_ENV=production autoops
-```
-
-### 3. Cloud Platform Deployments
+### 2. Cloud Platform Deployments
 
 #### Railway
 ```bash
@@ -195,8 +163,8 @@ curl http://your-domain.com/health
 
 ### Monitoring Logs
 ```bash
-# Docker logs
-docker-compose logs -f autoops
+# Cloud platform logs (Railway, Render, Fly.io)
+# Check your platform's dashboard for logs
 
 # Local logs (when running in background)
 tail -f logs/*.log
@@ -213,15 +181,6 @@ lsof -i :3000
 
 # Kill process
 kill -9 <PID>
-```
-
-#### Redis Connection Issues
-```bash
-# Check Redis status (if using Docker)
-docker-compose ps redis
-
-# Restart Redis
-docker-compose restart redis
 ```
 
 #### Memory Issues
@@ -279,24 +238,20 @@ REDIS_MAX_CONNECTIONS=10
 
 ### Data Backup
 ```bash
-# Backup Redis data (if using Docker)
-docker exec autoops_redis_1 redis-cli SAVE
-
-# Copy backup
-docker cp autoops_redis_1:/data/dump.rdb ./backup/
-```
-
 ### Application Logs
 ```bash
-# Collect logs for analysis
-docker-compose logs autoops > logs_$(date +%Y%m%d).log
+# Collect logs for analysis (cloud platforms)
+# Use your platform's log export features
+
+# Local logs
+npm run dev > logs_$(date +%Y%m%d).log 2>&1
 ```
 
 ## Support
 
 For deployment issues:
-1. Check the logs: `docker-compose logs -f`
-2. Verify environment variables
+1. Check your cloud platform's logs in their dashboard
+2. Verify environment variables are set correctly
 3. Test locally first: `npm run dev`
 4. Check Motia documentation: https://motia.dev
 
@@ -306,6 +261,5 @@ For deployment issues:
 - [ ] Health check returns 200: `curl http://localhost:3000/health`
 - [ ] API endpoint works: `curl -X POST http://localhost:3000/incident -H "Content-Type: application/json" -d '{"service":"test","error":"test","severity":"low"}'`
 - [ ] Logs show proper processing
-- [ ] No Redis connection errors
 - [ ] Memory usage is stable
 - [ ] Response times are acceptable (< 2s for API calls)

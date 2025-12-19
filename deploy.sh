@@ -75,18 +75,8 @@ deploy_local() {
 }
 
 deploy_docker() {
-    print_status "Deploying with Docker..."
-
-    if ! command -v docker &> /dev/null; then
-        print_error "Docker is not installed. Please install Docker first."
-        exit 1
-    fi
-
-    # Build and run with docker-compose
-    docker-compose up -d --build
-    print_success "Application deployed with Docker"
-    print_status "Check status with: docker-compose ps"
-    print_status "View logs with: docker-compose logs -f"
+    print_error "Docker deployment has been removed. Use 'render', 'railway', or 'fly' instead."
+    exit 1
 }
 
 deploy_railway() {
@@ -198,9 +188,6 @@ main() {
         "local")
             deploy_local
             ;;
-        "docker")
-            deploy_docker
-            ;;
         "railway")
             deploy_railway
             ;;
@@ -212,7 +199,7 @@ main() {
             ;;
         *)
             print_error "Unknown deployment target: $TARGET"
-            echo "Available targets: local, docker, railway, render, fly"
+            echo "Available targets: local, railway, render, fly"
             exit 1
             ;;
     esac
@@ -228,7 +215,6 @@ if [ $# -eq 0 ]; then
     echo ""
     echo "Targets:"
     echo "  local    - Deploy locally (default)"
-    echo "  docker   - Deploy with Docker"
     echo "  railway  - Prepare for Railway deployment"
     echo "  render   - Prepare for Render deployment"
     echo "  fly      - Prepare for Fly.io deployment"

@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: autoops
+    runtime: node
+    buildCommand: npm ci
+    startCommand: npm run dev
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GOOGLE_AI_API_KEY
+        sync: false
