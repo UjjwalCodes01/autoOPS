@@ -1,11 +1,13 @@
-export const config = {
+import type { StepConfig, Incident, ClassifiedIncident, StepContext } from '../types'
+
+export const config: StepConfig = {
   type: "event",
   name: "incident-classifier",
   subscribes: ["incident.received"],
   emits: ["incident.classified"]
 };
 
-export async function handler(data, ctx) {
+export async function handler(data: Incident, ctx: StepContext): Promise<void> {
   // 🧠 AI Logic: Classify severity
   const severity = determineSeverity(data.severityHint, data.error);
 
@@ -25,7 +27,7 @@ export async function handler(data, ctx) {
   });
 }
 
-function determineSeverity(hint, error) {
+function determineSeverity(hint: string, error: string): "critical" | "high" | "medium" | "low" {
   // AI-like logic: determine if this needs auto-remediation or immediate escalation
   const errorLower = error.toLowerCase();
   const hintLower = hint.toLowerCase();

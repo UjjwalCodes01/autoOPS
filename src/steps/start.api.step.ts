@@ -1,4 +1,6 @@
-export const config = {
+import type { StepConfig, Incident, StepContext } from '../types'
+
+export const config: StepConfig = {
   type: "api",
   name: "incident-api",
   method: "POST",
@@ -6,10 +8,8 @@ export const config = {
   emits: ["incident.received"]
 };
 
-export async function handler(data, ctx) {
-  console.log("Raw data received:", JSON.stringify(data));
-  
-  const incident = {
+export async function handler(data: any, ctx: StepContext): Promise<{ status: number; body: any }> {
+  const incident: Incident = {
     id: Math.floor(Math.random() * 10000),
     service: data?.body?.service || "unknown",
     error: data?.body?.error || "unspecified",

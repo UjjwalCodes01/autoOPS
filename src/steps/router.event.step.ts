@@ -1,11 +1,13 @@
-export const config = {
+import type { StepConfig, AnalyzedIncident, StepContext } from '../types'
+
+export const config: StepConfig = {
   type: "event",
   name: "intelligent-router",
   subscribes: ["incident.analyzed"],
   emits: ["incident.ready_for_remediation", "incident.ready_for_escalation", "incident.ready_for_monitoring"]
 };
 
-export async function handler(data, ctx) {
+export async function handler(data: AnalyzedIncident, ctx: StepContext): Promise<void> {
   ctx.logger.info("🎯 Intelligent Router", {
     incidentId: data.id,
     recommendation: data.recommendation,
@@ -27,10 +29,9 @@ export async function handler(data, ctx) {
       topic: "incident.ready_for_escalation",
       data
     });
-  } else if (data.recommendation === "attempt_remediation") {
+  } else if (data.recommendation === "remediate") {
     ctx.logger.info("🔧 Routing to remediation", {
-      incidentId: data.id,
-      action: data.suggestedAction
+      incidentId: data.id
     });
 
     await ctx.emit({
@@ -40,8 +41,7 @@ export async function handler(data, ctx) {
   } else {
     // recommendation === "monitor" - just log and monitor
     ctx.logger.info("👁️ Routing to monitoring", {
-      incidentId: data.id,
-      action: data.suggestedAction
+      incidentId: data.id
     });
 
     await ctx.emit({

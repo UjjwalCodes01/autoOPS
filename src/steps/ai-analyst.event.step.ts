@@ -6,13 +6,9 @@ export const config = {
 };
 
 export async function handler(data, ctx) {
-  // 🤖 Intelligent Incident Analysis Engine with Advanced State
-  // Using simple state management for reliability
 
-  // Initialize state for this incident
   const incidentKey = `incident:${data.id}`;
   
-  // Use a simple in-memory state for demo (in production: ctx.state)
   if (!global.incidentStates) {
     global.incidentStates = new Map();
   }
@@ -27,7 +23,6 @@ export async function handler(data, ctx) {
     };
   }
 
-  // Update analysis count
   state.analysisCount += 1;
   state.lastAnalyzed = new Date().toISOString();
 
@@ -122,7 +117,7 @@ export async function handler(data, ctx) {
       suggestedAction: analysis.suggested_action,
       confidence: analysis.confidence,
       analyzedAt: new Date().toISOString(),
-      state: state // Include state in event for other steps
+      state: state 
     }
   });
 }
