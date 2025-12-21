@@ -544,6 +544,3 @@ The bottom debug panel provides three essential views:
 - Test changes instantly without restarting the server
 - Perfect for iterative development and debugging
 
-The Workbench transforms your AutoOps system from code into an interactive, visual experience that judges can explore immediately. This demonstrates exceptional Developer Experience and makes your unified Motia architecture crystal clear.
-
-👉 **Pro Tip**: During your hackathon demo, use the Workbench to show live incident processing - it's far more impressive than terminal logs!
